@@ -1,6 +1,7 @@
-# dotbashrc
+# dotlocaldotbashrc
 
-Local `.bashrc` files that are sourced in a clean bash process.
+`.local.bashrc` files that are sourced in a clean bash process when entering
+the directory.
 
 *Replaces the [projector](https://github.com/bas080/projector) project.*
 
@@ -12,7 +13,7 @@ Local `.bashrc` files that are sourced in a clean bash process.
   - Makes it easier to keep and find commands that are related to that project.
   - Doesn't fill up the root bash history.
 - Inherits exported env variables of root process.
-- Does not inherit env variables of other .bashrc directories.
+- Does not inherit env variables of other `.local.bashrc` directories.
 
 ## Setup
 
@@ -20,10 +21,13 @@ Add the following to your `.bashrc`.
 
 ```bash
 # Required
-source "$HOME/.bashrc"
+curl 'https://raw.githubusercontent.com/bas080/dotlocaldotbashrc/master/dotlocaldotbashrc > "$HOME/.dotlocaldotbashrc"
+echo 'source "$HOME/.dotlocaldotbashrc"' >> ~/.bashrc
 
 # Optional: show .bashrc directory name in prompt.
 PS1="(bashrc:$BASHRC_HOME)$PS1"
+
+# Optional: add .local.* to your .gitignore
 ```
 
 ## Usage
@@ -34,7 +38,7 @@ bashrc: open /home/ant/projects/bashrc
 (bashrc:bashrc)$ cd nested/
 bashrc: exit /home/ant/projects/bashrc
 bashrc: open /home/ant/projects/bashrc/nested
-(bashrc:bashrc)$ cd
+(bashrc:nested)$ cd
 bashrc: exit /home/ant/projects/bashrc/nested
 (bashrc:bashrc)$
 ```
@@ -43,11 +47,11 @@ bashrc: exit /home/ant/projects/bashrc/nested
 > session being exited. We just use the initial bash process that was started
 > when bashrc and the rest of the interactive shell was bootstrapped.
 
-You can source the local .bashrc at anytime with `bashrc` function.
+You can source the local .local.bashrc at anytime with `dotlocaldotbashrc` function.
 
 ```bash
-$ bashrc
-bashrc: source '/home/ant/.bashrc'
+$ dotlocaldotbashrc
+bashrc: source '/home/ant/.local.bashrc'
 $
 ```
 
