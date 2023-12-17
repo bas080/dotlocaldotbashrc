@@ -33,14 +33,14 @@ PS1="(bashrc:$BASHRC_HOME)$PS1"
 ## Usage
 
 ```
-(bashrc:ant)$ cd projects/bashrc/
-bashrc: open /home/ant/projects/bashrc
-(bashrc:bashrc)$ cd nested/
-bashrc: exit /home/ant/projects/bashrc
-bashrc: open /home/ant/projects/bashrc/nested
-(bashrc:nested)$ cd
-bashrc: exit /home/ant/projects/bashrc/nested
-(bashrc:bashrc)$
+$ cd projects/bashrc/
+dotlocaldotbashrc: open /home/ant/projects/bashrc
+$ cd nested/
+dotlocaldotbashrc: exit /home/ant/projects/bashrc
+dotlocaldotbashrc: open /home/ant/projects/bashrc/nested
+$ cd
+dotlocaldotbashrc: exit /home/ant/projects/bashrc/nested
+$
 ```
 
 > Notice that navigating to the home directory resulted in only a bashrc bash
