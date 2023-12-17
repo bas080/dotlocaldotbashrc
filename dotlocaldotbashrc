@@ -12,6 +12,11 @@ _bashrc_dir() {
 BASHRC_HOME="$(_bashrc_dir "$PWD")"
 
 dotlocaldotbashrc () {
+  _bashrc_dir "$PWD" || {
+    echo "dotlocaldotbashrc: error: no parent directory with .local.bashrc. found"
+    return
+  }
+
   echo "dotlocaldotbashrc: source '$BASHRC_HOME/.local.bashrc'"
   source "$BASHRC_HOME/.local.bashrc"
 }
