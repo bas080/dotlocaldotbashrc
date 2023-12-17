@@ -22,7 +22,15 @@ _bashrc_init() {
   local bashrc_temp
 
   # Return early if no .bashrc is found.
-  bashrc_dir="$(_bashrc_dir "$PWD")" || return
+  bashrc_dir="$(_bashrc_dir "$PWD")" || {
+    # Exit the bash session if one is active.
+    test -n "$BASHRC_TEMP" && {
+      echo "$PWD" > "$BASHRC_TEMP"
+      exit
+    }
+    # Otherwise just return.
+    return
+  }
 
   # The local bashrc path changed.
   test "$bashrc_dir" != "$BASHRC_HOME" && {
