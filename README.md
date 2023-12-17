@@ -43,6 +43,14 @@ bashrc: exit /home/ant/projects/bashrc/nested
 > session being exited. We just use the initial bash process that was started
 > when bashrc and the rest of the interactive shell was bootstrapped.
 
+You can source the local .bashrc at anytime with `bashrc` function.
+
+```bash
+$ bashrc
+bashrc: source '/home/ant/.bashrc'
+$
+```
+
 ## License
 
 GPLv3

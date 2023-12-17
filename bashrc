@@ -10,9 +10,15 @@ _bashrc_dir() {
 }
 
 BASHRC_HOME="$(_bashrc_dir "$PWD")"
+BASHRC_HOME="${BASHRC_HOME:-$HOME}"
 HISTFILE="$BASHRC_HOME/.bash_history"
 
 test "$BASHRC_HOME" = "$HOME" || {
+  source "$BASHRC_HOME/.bashrc"
+}
+
+bashrc () {
+  echo "bashrc: source '$BASHRC_HOME/.bashrc'"
   source "$BASHRC_HOME/.bashrc"
 }
 
