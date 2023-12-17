@@ -2,6 +2,8 @@
 
 Local `.bashrc` files that are sourced in a clean bash process.
 
+*Replaces the [projector](https://github.com/bas080/projector) project.*
+
 ## Features
 
 - Makes a simple to define env variables, aliases and functions for a specific
