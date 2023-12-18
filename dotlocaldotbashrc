@@ -17,6 +17,7 @@ dotlocaldotbashrc () {
     return
   }
 
+  BASHRC_SOURCED="1"
   echo "dotlocaldotbashrc: source '$BASHRC_HOME/.local.bashrc'"
   source "$BASHRC_HOME/.local.bashrc"
 }
@@ -27,6 +28,10 @@ _bashrc_init() {
 
   # Return early if no .local.bashrc is found.
   bashrc_dir="$(_bashrc_dir "$PWD")"
+
+  test -n "$BASHRC_TEMP" && test -z "$BASHRC_SOURCED" && {
+    dotlocaldotbashrc
+  }
 
   # The local bashrc path changed.
   test "$bashrc_dir" != "$BASHRC_HOME" && {
