@@ -17,18 +17,20 @@ the directory.
 
 ## Setup
 
-Add the following to your `.bashrc`.
+A quick setup script.
 
 ```bash
-# Required
 curl 'https://raw.githubusercontent.com/bas080/dotlocaldotbashrc/master/dotlocaldotbashrc > "$HOME/.dotlocaldotbashrc"
 echo 'source "$HOME/.dotlocaldotbashrc"' >> ~/.bashrc
-
-# Optional: show .bashrc directory name in prompt.
-PS1="(bashrc:$BASHRC_HOME)$PS1"
-
-# Optional: add .local.* to your .gitignore
 ```
+
+Optionally you can show which local bashrc is currently active in your prompt.
+
+```bash
+PS1="(bashrc:$BASHRC_HOME)$PS1"
+```
+
+When using in repositores consider adding `.local.*` to your `.gitignore`.
 
 ## Usage
 
