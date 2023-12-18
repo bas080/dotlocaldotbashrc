@@ -40,6 +40,13 @@ _bashrc_init() {
   # The local bashrc path changed.
   test "$bashrc_dir" != "$BASHRC_HOME" && {
 
+    # Do a fg to make sure you don't loose work
+    if [[ -n $(jobs -p) ]]; then
+      jobs
+      echo "dotlocaldotbashrc: error: will not exit with jobs in background."
+      return
+    fi
+
     # Current bash process is a local bashrc session.
     test -n "$BASHRC_TEMP" && {
       echo "$PWD" > "$BASHRC_TEMP"
