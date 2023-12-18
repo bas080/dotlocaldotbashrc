@@ -22,6 +22,10 @@ dotlocaldotbashrc () {
   source "$BASHRC_HOME/.local.bashrc"
 }
 
+lcd() {
+  cd "$BASHRC_HOME/$1"
+}
+
 _bashrc_init() {
   local bashrc_dir
   local bashrc_temp
