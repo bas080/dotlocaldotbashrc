@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-set -x
-
 EDITOR="cat"
 
+{
 source ./dotlocaldotbashrc
 
 rm -r /tmp/dotlocaldotbashrc/test || true
@@ -35,3 +34,4 @@ cd ../../
 _bashrc_init
 
 dotlocaldotbashrc
+} 2>&1 | sed "s#$PWD#/#g"
