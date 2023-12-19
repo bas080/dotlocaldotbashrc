@@ -9,7 +9,7 @@ the directory.
 
 - Makes a simple to define env variables, aliases and functions for a specific
   project directory.
-- Creates an bash history that is a separate from the root bash history.
+- Creates a bash history that is a separate from the root bash history.
   - Makes it easier to keep and find commands that are related to that project.
   - Doesn't fill up the root bash history.
 - Inherits exported env variables of root process.
@@ -20,17 +20,21 @@ the directory.
 A quick setup script.
 
 ```bash
-curl 'https://raw.githubusercontent.com/bas080/dotlocaldotbashrc/master/dotlocaldotbashrc > "$HOME/.dotlocaldotbashrc"
-echo 'source "$HOME/.dotlocaldotbashrc"' >> ~/.bashrc
+curl 'https://raw.githubusercontent.com/bas080/dotlocaldotbashrc/master/dotlocaldotbashrc' > "$HOME/.dotlocaldotbashrc" &&
+  echo 'source "$HOME/.dotlocaldotbashrc"' >> ~/.bashrc
 ```
 
-You can now create a `.local.bashrc` in any directory by running
-`dotlocaldotbashrc init`.
+After re-sourcing your .bashrc you can create a `.local.bashrc` in a directory where you would like
+a local bashrc by running `dotlocaldotbashrc init`.
 
 Optionally you can show which local bashrc is currently active in your prompt.
 
 ```bash
-PS1="(bashrc:$BASHRC_HOME)$PS1"
+# What I use:
+PS1="${BASHRC_HOME#$HOME/}:\W "
+
+# Looks like this:
+projects/dotlocaldotbashrc:dotlocaldotbashrc cd ../█
 ```
 
 When using in repositores consider adding `.local.*` to your `.gitignore`.
