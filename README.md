@@ -24,6 +24,9 @@ curl 'https://raw.githubusercontent.com/bas080/dotlocaldotbashrc/master/dotlocal
 echo 'source "$HOME/.dotlocaldotbashrc"' >> ~/.bashrc
 ```
 
+You can now create a `.local.bashrc` in any directory by running
+`dotlocaldotbashrc init`.
+
 Optionally you can show which local bashrc is currently active in your prompt.
 
 ```bash
