@@ -12,8 +12,8 @@ the directory.
 - Creates a bash history that is a separate from the root bash history.
   - Makes it easier to keep and find commands that are related to that project.
   - Doesn't fill up the root bash history.
-- Inherits exported env variables of root process.
-- Does not inherit env variables of other `.local.bashrc` directories.
+- Does not inherit env variables of other `.local.bashrc` directories when
+  jumping directories.
 
 ## Setup
 
@@ -43,12 +43,12 @@ When using in repositores consider adding `.local.*` to your `.gitignore`.
 
 ```
 $ cd projects/bashrc/
-dotlocaldotbashrc: open /home/ant/projects/bashrc
+dotlocaldotbashrc: open /home/user/projects/bashrc
 $ cd nested/
-dotlocaldotbashrc: exit /home/ant/projects/bashrc
-dotlocaldotbashrc: open /home/ant/projects/bashrc/nested
+dotlocaldotbashrc: exit /home/user/projects/bashrc
+dotlocaldotbashrc: open /home/user/projects/bashrc/nested
 $ cd
-dotlocaldotbashrc: exit /home/ant/projects/bashrc/nested
+dotlocaldotbashrc: exit /home/user/projects/bashrc/nested
 $
 ```
 
@@ -60,8 +60,30 @@ You can source the local .local.bashrc at anytime with `dotlocaldotbashrc` funct
 
 ```bash
 $ dotlocaldotbashrc
-bashrc: source '/home/ant/.local.bashrc'
+bashrc: source '/home/user/.local.bashrc'
 $
+```
+
+One notable feature of `dotlocaldotbashrc` is its behavior when background jobs
+are active. When attempting to exit the `dotlocaldotbashrc` session using the
+`cd` command or when explicitly running the `dotlocaldotbashrc` command with the
+`exit` option, the script checks for any background jobs in the current session.
+
+If there are background jobs running, the script will display an error message
+and refrain from exiting the session. This behavior ensures that you don't
+unintentionally lose work by exiting a session with active background jobs.
+
+```bash
+$ cd projects/myproject/
+dotlocaldotbashrc: open /home/user/projects/myproject
+
+# Start a background job
+$ sleep 300 & # ctrl-z
+[1] 12345
+
+# Attempt to exit the dotlocaldotbashrc session
+$ cd ..
+dotlocaldotbashrc: error: will not exit with jobs in the background.
 ```
 
 ## Test
