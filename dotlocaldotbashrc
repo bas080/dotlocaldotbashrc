@@ -51,6 +51,8 @@ _bashrc_init() {
   # The local bashrc path changed.
   test "$bashrc_dir" != "$BASHRC_HOME" && {
 
+    wait
+
     # Do a fg to make sure you don't loose work
     if [[ -n $(jobs -p) ]]; then
       jobs
