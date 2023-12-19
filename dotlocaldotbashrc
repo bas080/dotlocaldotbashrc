@@ -20,7 +20,7 @@ dotlocaldotbashrc () {
     fi
 
     echo -e '#/usr/bin/env bash\n' >> .local.bashrc
-    $EDITOR .local.bashrc
+    "${EDITOR:-vi}" .local.bashrc
   fi
 
   _bashrc_dir "$PWD" || {
