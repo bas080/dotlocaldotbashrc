@@ -12,6 +12,17 @@ _bashrc_dir() {
 BASHRC_HOME="$(_bashrc_dir "$PWD")"
 
 dotlocaldotbashrc () {
+  if [ "$1" = "init" ]; then
+
+    if [ -f .local.bashrc ]; then
+      echo "dotlocaldotbashrc: error: $PWD already has a .local.bashrc"
+      return 1
+    fi
+
+    echo -e '#/usr/bin/env bash\n' >> .local.bashrc
+    $EDITOR .local.bashrc
+  fi
+
   _bashrc_dir "$PWD" || {
     echo "dotlocaldotbashrc: error: no parent directory with .local.bashrc. found"
     return
