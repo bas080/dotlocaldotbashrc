@@ -1,0 +1,105 @@
+  + EDITOR=cat
+  + source ./dotlocaldotbashrc
+  +++ _bashrc_dir /home/ant/projects/dotlocaldotbashrc
+  +++ local dir=/home/ant/projects/dotlocaldotbashrc
+  +++ test -f /home/ant/projects/dotlocaldotbashrc/.local.bashrc
+  +++ echo /home/ant/projects/dotlocaldotbashrc
+  +++ return 0
+  ++ BASHRC_HOME=/home/ant/projects/dotlocaldotbashrc
+  ++ PROMPT_COMMAND='_bashrc_init;'
+  + rm -r /tmp/dotlocaldotbashrc/test
+  + mkdir -p /tmp/dotlocaldotbashrc/test/subdirectory
+  + cd /tmp/dotlocaldotbashrc/test
+  + dotlocaldotbashrc init
+  + '[' init = init ']'
+  + '[' -f .local.bashrc ']'
+  + echo -e '#/usr/bin/env bash\n'
+  + cat .local.bashrc
+  #/usr/bin/env bash
+  
+  + _bashrc_dir /tmp/dotlocaldotbashrc/test
+  + local dir=/tmp/dotlocaldotbashrc/test
+  + test -f /tmp/dotlocaldotbashrc/test/.local.bashrc
+  + echo /tmp/dotlocaldotbashrc/test
+  /tmp/dotlocaldotbashrc/test
+  + return 0
+  + BASHRC_SOURCED=1
+  + echo 'dotlocaldotbashrc: source '\''/home/ant/projects/dotlocaldotbashrc/.local.bashrc'\'''
+  dotlocaldotbashrc: source '/home/ant/projects/dotlocaldotbashrc/.local.bashrc'
+  + source /home/ant/projects/dotlocaldotbashrc/.local.bashrc
+  ++ echo 'sourced: /home/ant/projects/dotlocaldotbashrc/.bashrc'
+  sourced: /home/ant/projects/dotlocaldotbashrc/.bashrc
+  + test -f .local.bashrc
+  + dotlocaldotbashrc init
+  + '[' init = init ']'
+  + '[' -f .local.bashrc ']'
+  + echo 'dotlocaldotbashrc: error: /tmp/dotlocaldotbashrc/test already has a .local.bashrc'
+  dotlocaldotbashrc: error: /tmp/dotlocaldotbashrc/test already has a .local.bashrc
+  + return 1
+  + echo 'echo hello .local.bashrc'
+  + dotlocaldotbashrc
+  + '[' '' = init ']'
+  + _bashrc_dir /tmp/dotlocaldotbashrc/test
+  + local dir=/tmp/dotlocaldotbashrc/test
+  + test -f /tmp/dotlocaldotbashrc/test/.local.bashrc
+  + echo /tmp/dotlocaldotbashrc/test
+  /tmp/dotlocaldotbashrc/test
+  + return 0
+  + BASHRC_SOURCED=1
+  + echo 'dotlocaldotbashrc: source '\''/home/ant/projects/dotlocaldotbashrc/.local.bashrc'\'''
+  dotlocaldotbashrc: source '/home/ant/projects/dotlocaldotbashrc/.local.bashrc'
+  + source /home/ant/projects/dotlocaldotbashrc/.local.bashrc
+  ++ echo 'sourced: /home/ant/projects/dotlocaldotbashrc/.bashrc'
+  sourced: /home/ant/projects/dotlocaldotbashrc/.bashrc
+  + cd subdirectory
+  + dotlocaldotbashrc
+  + '[' '' = init ']'
+  + _bashrc_dir /tmp/dotlocaldotbashrc/test/subdirectory
+  + local dir=/tmp/dotlocaldotbashrc/test/subdirectory
+  + test -f /tmp/dotlocaldotbashrc/test/subdirectory/.local.bashrc
+  + test / = /tmp/dotlocaldotbashrc/test/subdirectory
+  ++ dirname /tmp/dotlocaldotbashrc/test/subdirectory
+  + _bashrc_dir /tmp/dotlocaldotbashrc/test
+  + local dir=/tmp/dotlocaldotbashrc/test
+  + test -f /tmp/dotlocaldotbashrc/test/.local.bashrc
+  + echo /tmp/dotlocaldotbashrc/test
+  /tmp/dotlocaldotbashrc/test
+  + return 0
+  + BASHRC_SOURCED=1
+  + echo 'dotlocaldotbashrc: source '\''/home/ant/projects/dotlocaldotbashrc/.local.bashrc'\'''
+  dotlocaldotbashrc: source '/home/ant/projects/dotlocaldotbashrc/.local.bashrc'
+  + source /home/ant/projects/dotlocaldotbashrc/.local.bashrc
+  ++ echo 'sourced: /home/ant/projects/dotlocaldotbashrc/.bashrc'
+  sourced: /home/ant/projects/dotlocaldotbashrc/.bashrc
+  + cd ../../
+  + _bashrc_init
+  + local bashrc_dir
+  + local bashrc_temp
+  ++ _bashrc_dir /tmp/dotlocaldotbashrc
+  ++ local dir=/tmp/dotlocaldotbashrc
+  ++ test -f /tmp/dotlocaldotbashrc/.local.bashrc
+  ++ test / = /tmp/dotlocaldotbashrc
+  +++ dirname /tmp/dotlocaldotbashrc
+  ++ _bashrc_dir /tmp
+  ++ local dir=/tmp
+  ++ test -f /tmp/.local.bashrc
+  ++ test / = /tmp
+  +++ dirname /tmp
+  ++ _bashrc_dir /
+  ++ local dir=/
+  ++ test -f //.local.bashrc
+  ++ test / = /
+  ++ return 1
+  + bashrc_dir=
+  + test -n /tmp/tmp.u5D5EfLJjC
+  + test -z 1
+  + test '' '!=' /home/ant/projects/dotlocaldotbashrc
+  + wait
+  ++ jobs -p
+  + [[ -n '' ]]
+  + test -n /tmp/tmp.u5D5EfLJjC
+  + echo /tmp/dotlocaldotbashrc
+  + echo 'dotlocaldotbashrc: exit /home/ant/projects/dotlocaldotbashrc'
+  dotlocaldotbashrc: exit /home/ant/projects/dotlocaldotbashrc
+  + exit
+  (Exit Code: 0)

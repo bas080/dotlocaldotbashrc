@@ -64,6 +64,16 @@ bashrc: source '/home/ant/.local.bashrc'
 $
 ```
 
+## Test
+
+How to run the tests:
+
+```bash
+SPAT_SHELL='bash' spat ./dotlocaldotbashrc.t
+```
+
+> Uses [spat](https://github.com/bas080/spat) to run expect tests.
+
 ## License
 
 GPLv3
