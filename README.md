@@ -1,4 +1,4 @@
-# dotlocaldotbashrc
+# 👇local👇bashrc
 
 `.local.bashrc` files that are sourced in a clean bash process when entering
 the directory.
