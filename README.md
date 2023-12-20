@@ -41,6 +41,24 @@ When using in repositores consider adding `.local.*` to your `.gitignore`.
 
 ## Usage
 
+Quick start:
+
+```text
+USAGE:
+
+  dotlocaldotbashrc [subcommand]
+
+  Will re-source the local bashrc if no subcommand is provided.
+
+  [subcommand]
+
+    init - create a .local.bashrc in current directory.
+
+    edit - opens the bashrc in $EDITOR and re-sources on exit.
+```
+
+More information:
+
 ```
 $ cd projects/bashrc/
 dotlocaldotbashrc: open /home/user/projects/bashrc
@@ -63,6 +81,9 @@ $ dotlocaldotbashrc
 bashrc: source '/home/user/.local.bashrc'
 $
 ```
+
+You can quickly edit and automatically source after editor quit with
+`dotlocaldotbashrc edit`.
 
 One notable feature of `dotlocaldotbashrc` is its behavior when background jobs
 are active. When attempting to exit the `dotlocaldotbashrc` session using the

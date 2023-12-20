@@ -23,6 +23,18 @@ dotlocaldotbashrc () {
     "${EDITOR:-vi}" .local.bashrc
   fi
 
+  if [ "$1" = "edit" ]; then
+    if [ -z "$BASHRC_HOME" ]; then
+      echo "dotlocaldotbashrc: error: cannot find a .local.bashrc"
+      return 1
+    fi
+
+    "${EDITOR:-vi}" "$BASHRC_HOME/.local.bashrc"
+
+    # And re-source
+    dotlocaldotbashrc
+  fi
+
   _bashrc_dir "$PWD" || {
     echo "dotlocaldotbashrc: error: no parent directory with .local.bashrc. found"
     return
