@@ -44,17 +44,14 @@ When using in repositores consider adding `.local.*` to your `.gitignore`.
 Quick start:
 
 ```text
-USAGE:
+dotlocaldotbashrc [<subcommand>]
+  Create and configure directory specific bash sessions.
 
-  dotlocaldotbashrc [subcommand]
-
-  Will re-source the local bashrc if no subcommand is provided.
+  Will source .local.bashrc when no subcommand is defined.
 
   [subcommand]
-
-    init - create a .local.bashrc in current directory.
-
-    edit - opens the bashrc in $EDITOR and re-sources on exit.
+    init - Create a .local.bashrc in current directory.
+    edit - Opens the bashrc in $EDITOR and re-sources on exit.
 ```
 
 More information:
