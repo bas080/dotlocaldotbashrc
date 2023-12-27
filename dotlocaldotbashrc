@@ -12,7 +12,9 @@ _bashrc_dir() {
 BASHRC_HOME="$(_bashrc_dir "$PWD")"
 
 dotlocaldotbashrc () {
+  local subcommand;
   if [ "$1" = "init" ]; then
+    subcommand="init"
 
     if [ -f .local.bashrc ]; then
       echo "dotlocaldotbashrc: error: $PWD already has a .local.bashrc"
@@ -24,6 +26,7 @@ dotlocaldotbashrc () {
   fi
 
   if [ "$1" = "edit" ]; then
+    subcommand="edit"
     if [ -z "$BASHRC_HOME" ]; then
       echo "dotlocaldotbashrc: error: cannot find a .local.bashrc"
       return 1
@@ -33,6 +36,11 @@ dotlocaldotbashrc () {
 
     # And re-source
     dotlocaldotbashrc
+  fi
+
+  if [ -n "$1" ] && [ -z "$subcommand" ]; then
+    echo "dotlocaldotbashrc: error: $1 is not a valid command"
+    return 1
   fi
 
   _bashrc_dir "$PWD" || {
