@@ -91,7 +91,9 @@ _bashrc_init() {
     bashrc_temp="$(mktemp)"
 
     echo "dotlocaldotbashrc: open $bashrc_dir"
-    BASHRC_TEMP="$bashrc_temp" bash
+    HISTFILE="$bashrc_dir/.local.bash_history" \
+      BASHRC_TEMP="$bashrc_temp" \
+      bash
 
     test -s "$bashrc_temp" || exit
     cd "$(cat "$bashrc_temp")" || true
