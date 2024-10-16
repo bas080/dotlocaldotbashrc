@@ -1,0 +1,108 @@
+#!/usr/bin/env zsh
+
+_zshrc_dir() {
+  local dir="$1"
+
+  test -f "$dir/.local.zshrc" && echo "$dir" && return 0
+  test '/' = "$dir" && return 1
+
+  _zshrc_dir "$(dirname "$1")"
+}
+
+ZSHRC_HOME="$(_zshrc_dir "$PWD")"
+
+dotlocaldotzshrc () {
+  local subcommand;
+  if [ "$1" = "init" ]; then
+    subcommand="init"
+
+    if [ -f .local.zshrc ]; then
+      echo "dotlocaldotzshrc: error: $PWD already has a .local.zshrc"
+      return 1
+    fi
+
+    printf '#!/usr/bin/env zsh\n' >> .local.zshrc
+    "${EDITOR:-vi}" .local.zshrc
+  fi
+
+  if [ "$1" = "edit" ]; then
+    subcommand="edit"
+    if [ -z "$ZSHRC_HOME" ]; then
+      echo "dotlocaldotzshrc: error: cannot find a .local.zshrc"
+      return 1
+    fi
+
+    "${EDITOR:-vi}" "$ZSHRC_HOME/.local.zshrc"
+
+    # And re-source
+    dotlocaldotzshrc
+  fi
+
+  if [ -n "$1" ] && [ -z "$subcommand" ]; then
+    echo "dotlocaldotzshrc: error: $1 is not a valid command"
+    return 1
+  fi
+
+  _zshrc_dir "$PWD" || {
+    echo "dotlocaldotzshrc: error: no parent directory with .local.zshrc found"
+    return
+  }
+
+  ZSHRC_SOURCED="1"
+  echo "dotlocaldotzshrc: source '$ZSHRC_HOME/.local.zshrc'"
+  source "$ZSHRC_HOME/.local.zshrc"
+}
+
+lcd() {
+  cd "$ZSHRC_HOME/$1"
+}
+
+_zshrc_init() {
+  local zshrc_dir
+  local zshrc_temp
+
+  # Return early if no .local.zshrc is found.
+  zshrc_dir="$(_zshrc_dir "$PWD")"
+
+  test -n "$ZSHRC_TEMP" && test -z "$ZSHRC_SOURCED" && {
+    dotlocaldotzshrc
+  }
+
+  # The local zshrc path changed.
+  test "$zshrc_dir" != "$ZSHRC_HOME" && {
+
+    wait
+
+    # Do a fg to make sure you don't lose work
+    if [[ -n $(jobs -p) ]]; then
+      jobs
+      echo "dotlocaldotzshrc: error: will not exit with jobs in background."
+      return
+    fi
+
+    # Current zsh process is a local zshrc session.
+    test -n "$ZSHRC_TEMP" && {
+      echo "$PWD" > "$ZSHRC_TEMP"
+      echo "dotlocaldotzshrc: exit $ZSHRC_HOME"
+      exit
+    }
+
+    # Current zsh process is the original (root) session.
+    zshrc_temp="$(mktemp)"
+
+    echo "dotlocaldotzshrc: open $zshrc_dir"
+    HISTFILE="$zshrc_dir/.local.zsh_history" \
+      ZSHRC_TEMP="$zshrc_temp" \
+      zsh
+
+    test -s "$ZSHRC_TEMP" || exit
+    cd "$(cat "$ZSHRC_TEMP")" || true
+    _zshrc_init
+
+  }
+
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _zshrc_init
+
