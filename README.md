@@ -46,7 +46,7 @@ When using in repositories consider adding `.local.*` to your `.gitignore`.
 A quick setup script for Z shell.
 
 ```zsh
-curl 'https://github.com/brianmatzelle/dotlocaldotrc/raw/refs/heads/master/zsh/dotlocaldotzshrc' > "$HOME/.dotlocaldotzshrc" &&
+curl 'https://raw.githubusercontent.com/brianmatzelle/dotlocaldotrc/refs/heads/master/zsh/dotlocaldotzshrc' > "$HOME/.dotlocaldotzshrc" &&
   echo 'source "$HOME/.dotlocaldotzshrc"' >> ~/.zshrc
 ```
 
