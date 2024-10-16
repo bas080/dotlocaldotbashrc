@@ -1,6 +1,7 @@
-# 👇local👇bashrc
 
-`.local.bashrc` files that are sourced in a clean bash process when entering
+# 👇local👇(bash|zsh)rc
+
+`.local.bashrc`  or  `.local.zshrc` files that are sourced in a clean process when entering
 the directory.
 
 *Replaces the [projector](https://github.com/bas080/projector) project.*
@@ -9,18 +10,20 @@ the directory.
 
 - Makes a simple to define env variables, aliases and functions for a specific
   project directory.
-- Creates a bash history that is a separate from the root bash history.
+- Creates a shell history that is a separate from the root shell history.
   - Makes it easier to keep and find commands that are related to that project.
-  - Doesn't fill up the root bash history.
-- Does not inherit env variables of other `.local.bashrc` directories when
+  - Doesn't fill up the root shell history.
+- Does not inherit env variables of other `.local.bashrc`/`.local.zshrc` directories when
   jumping directories.
 
 ## Setup
 
-A quick setup script.
+### Bash:
+
+A quick setup script for bash.
 
 ```bash
-curl 'https://raw.githubusercontent.com/bas080/dotlocaldotbashrc/master/dotlocaldotbashrc' > "$HOME/.dotlocaldotbashrc" &&
+curl 'https://raw.githubusercontent.com/brianmatzelle/dotlocaldotrc/refs/heads/master/bash/dotlocaldotbashrc' > "$HOME/.dotlocaldotbashrc" &&
   echo 'source "$HOME/.dotlocaldotbashrc"' >> ~/.bashrc
 ```
 
@@ -37,9 +40,35 @@ PS1="${BASHRC_HOME#$HOME/}:\W "
 projects/dotlocaldotbashrc:dotlocaldotbashrc cd ../█
 ```
 
-When using in repositores consider adding `.local.*` to your `.gitignore`.
+When using in repositories consider adding `.local.*` to your `.gitignore`.
+
+### Zsh:
+
+A quick setup script for Z shell.
+
+```zsh
+curl 'https://github.com/brianmatzelle/dotlocaldotrc/raw/refs/heads/master/zsh/dotlocaldotzshrc' > "$HOME/.dotlocaldotzshrc" &&
+  echo 'source "$HOME/.dotlocaldotzshrc"' >> ~/.zshrc
+```
+
+After re-sourcing your .zshrc you can create a `.local.zshrc` in a directory where you would like
+a local zshrc by running `dotlocaldotzshrc init`.
+
+Optionally you can show which local zshrc is currently active in your prompt.
+
+```zsh
+# What I use:
+PS1="${ZSHRC_HOME#$HOME/}:\W "
+
+# Looks like this:
+projects/dotlocaldotzshrc:dotlocaldotzshrc cd ../█
+```
+
+When using in repositories consider adding `.local.*` to your `.gitignore`.
 
 ## Usage
+
+### Bash
 
 Quick start:
 
@@ -102,6 +131,71 @@ $ sleep 300 & # ctrl-z
 # Attempt to exit the dotlocaldotbashrc session
 $ cd ..
 dotlocaldotbashrc: error: will not exit with jobs in the background.
+```
+
+### Zsh
+
+Quick start:
+
+```text
+dotlocaldotzshrc [<subcommand>]
+  Create and configure directory specific zsh sessions.
+
+  Will source .local.zshrc when no subcommand is defined.
+
+  [subcommand]
+    init - Create a .local.zshrc in current directory.
+    edit - Opens the zshrc in $EDITOR and re-sources on exit.
+```
+
+More information:
+
+```
+$ cd projects/zshrc/
+dotlocaldotzshrc: open /home/user/projects/zshrc
+$ cd nested/
+dotlocaldotzshrc: exit /home/user/projects/zshrc
+dotlocaldotzshrc: open /home/user/projects/zshrc/nested
+$ cd
+dotlocaldotzshrc: exit /home/user/projects/zshrc/nested
+$
+```
+
+> Notice that navigating to the home directory resulted in only a zshrc zsh
+> session being exited. We just use the initial zsh process that was started
+> when zshrc and the rest of the interactive shell was bootstrapped.
+
+You can source the local .local.zshrc at anytime with `dotlocaldotzshrc` function.
+
+```zsh
+$ dotlocaldotzshrc
+zshrc: source '/home/user/.local.zshrc'
+$
+```
+
+You can quickly edit and automatically source after editor quit with
+`dotlocaldotzshrc edit`.
+
+One notable feature of `dotlocaldotzshrc` is its behavior when background jobs
+are active. When attempting to exit the `dotlocaldotzshrc` session using the
+`cd` command or when explicitly running the `dotlocaldotzshrc` command with the
+`exit` option, the script checks for any background jobs in the current session.
+
+If there are background jobs running, the script will display an error message
+and refrain from exiting the session. This behavior ensures that you don't
+unintentionally lose work by exiting a session with active background jobs.
+
+```zsh
+$ cd projects/myproject/
+dotlocaldotzshrc: open /home/user/projects/myproject
+
+# Start a background job
+$ sleep 300 & # ctrl-z
+[1] 12345
+
+# Attempt to exit the dotlocaldotzshrc session
+$ cd ..
+dotlocaldotzshrc: error: will not exit with jobs in the background.
 ```
 
 ## Test
