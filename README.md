@@ -1,4 +1,3 @@
-
 # 👇local👇(bash|zsh)rc
 
 `.local.bashrc`  or  `.local.zshrc` files that are sourced in a clean process when entering
@@ -202,11 +201,19 @@ dotlocaldotzshrc: error: will not exit with jobs in the background.
 
 How to run the tests:
 
+### Bash
+
 ```bash
 SPAT_SHELL='bash' spat ./dotlocaldotbashrc.t
 ```
 
-> Uses [spat](https://github.com/bas080/spat) to run expect tests.
+### Zsh
+
+```bash
+SPAT_SHELL='zsh' spat ./dotlocaldotzshrc.t
+```
+
+Uses [spat](https://github.com/bas080/spat) to run expect tests.
 
 ## License
 
