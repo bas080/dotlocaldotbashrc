@@ -7,6 +7,7 @@
   /tmp/dotlocaldotbashrc/test
   dotlocaldotbashrc: source '//.local.bashrc'
   sourced: //.bashrc
+  /tmp/dotlocaldotbashrc/test/subdirectory
   /tmp/dotlocaldotbashrc/test
   dotlocaldotbashrc: source '//.local.bashrc'
   sourced: //.bashrc

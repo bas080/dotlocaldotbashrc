@@ -14,6 +14,7 @@ the directory.
   - Doesn't fill up the root bash history.
 - Does not inherit env variables of other `.local.bashrc` directories when
   jumping directories.
+- Comes with an `lcd` alias to quickly jump to `.local.bashrc` directory
 
 ## Setup
 
